@@ -35,7 +35,7 @@ void GPIODirectionModeSet(u32 port, u8 pins, gpio_mode_t mode)
 
     *reg = data;
 
-    reg = (port + GPIOAFSEL);
+    reg = (port + GPIODIR);
     data = *reg;
 
     data &= ~(pins);
@@ -46,6 +46,9 @@ void GPIODirectionModeSet(u32 port, u8 pins, gpio_mode_t mode)
 
 	*reg = data;
 
+    reg = (port + GPIOAFSEL);
+    data = *reg;
+
     data &= ~(pins);
     if (mode == MODE_AF)
         data |= (0xff & pins);
@@ -53,9 +56,6 @@ void GPIODirectionModeSet(u32 port, u8 pins, gpio_mode_t mode)
         data |= (0x00 & pins);
 
 	*reg = data;
-
-    reg = (port + GPIODIR);
-	data = *reg;
 }
 
 u8 GPIODirGet(u32 port, u8 pins)
@@ -146,6 +146,23 @@ void GPIOPadSet(u32 port, u8 pins, gpio_drive_t str, gpio_pad_t pad)
         data &= ~(pins);
         data |= (0xFF & pins);
     }
+    else if(pad == PAD_NPU_NPD)
+    {
+        reg = (port + GPIOPDR);
+        data = *reg;
+        data &= ~(pins);
+        data |= (0x00 & pins);
+
+        reg = (port + GPIOPUR);
+        data = *reg;
+        data &= ~(pins);
+        data |= (0x00 & pins);
+
+        reg = (port + GPIOODR);
+        data = *reg;
+        data &= ~(pins);
+        data |= (0x00 & pins);
+    }
 
     *reg = data;
 
@@ -204,7 +221,7 @@ void GPIOWrite(u32 port, u8 pins, u8 data)
 {
     volatile u32* reg = (port + (pins << 2));
     *reg |= (data << 2);
-    *reg &= (data << 2); 
+    *reg &= (data << 2);
 }
 
 u8 GPIORead(u32 port, u8 pins)

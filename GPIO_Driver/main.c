@@ -13,24 +13,9 @@ void main(void)
 	GPIODirectionModeSet(PORTF, 0b00001110, MODE_OUT);
 	GPIODirectionModeSet(PORTF, 0b00010000, MODE_IN);
 	GPIOPadSet(PORTF, 0b00010000, Drive_4mA, Pad_PU);
-	u32 i;
-	while(1)
-	{
-		GPIOWrite(PORTF, 0b00001110, 0b00000000);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00000010);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00000100);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00000110);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00001000);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00001010);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00001100);
-		for(i = 0; i < 16000000; i++);
-		GPIOWrite(PORTF, 0b00001110, 0b00001110);
-		for(i = 0; i < 16000000; i++);
-	}
+	GPIOPadSet(PORTF, 0b00001110, Drive_2mA, PAD_NPU_NPD);
+	CLRBIT(OFFSET(PORTF, 0x3FC), 2);
+	CLRBIT(OFFSET(PORTF, 0x3FC), 3);
+	SETBIT(OFFSET(PORTF, 0x3FC), 4);
+	//GPIOWrite(PORTF, 0b00001110, 0b00000010);
 }
