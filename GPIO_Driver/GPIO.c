@@ -220,12 +220,12 @@ u8 GPIOOpenDrainGet(u32 port, u8 pins)
 void GPIOWrite(u32 port, u8 pins, u8 data)
 {
     volatile u32* reg = (port + (pins << 2));
-    *reg |= (data << 2);
-    *reg &= (data << 2);
+    *reg |= data;
+    *reg &= data;
 }
 
 u8 GPIORead(u32 port, u8 pins)
 {
     volatile u32* reg = (port + (pins << 2));
-    return (*reg >> 2);
+    return *reg;
 }
