@@ -14,6 +14,8 @@ typedef enum {MODE_IN = 0x00, MODE_OUT = 0xff, MODE_AF = 0x3} gpio_mode_t;
 typedef enum {PORTA = GPIO_PORTA, PORTB = GPIO_PORTB, PORTC = GPIO_PORTC, PORTD = GPIO_PORTD, PORTE = GPIO_PORTE, PORTF = GPIO_PORTF} gpio_port_t;
 typedef enum {Drive_2mA, Drive_4mA, Drive_8mA, Drive_8mA_Slow} gpio_drive_t;
 typedef enum {Pad_PU, Pad_PD , PAD_NPU_NPD, Pad_OD} gpio_pad_t;
+typedef enum {MODE_EDGE, MODE_RISING, MODE_FALLING, MODE_HIGH, MODE_LOW} Interrupt_mode_t;
+
 
 //Functions prototype
 
@@ -37,5 +39,6 @@ void GPIOWrite(u32 port, u8 pins, u8 data);
 
 void ClockInit();
 
+void GPIOISet(u32 port, u8 pins,Interrupt_mode_t mode);
 
 #endif /* GPIO_H_ */

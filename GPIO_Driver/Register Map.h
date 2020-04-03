@@ -29,6 +29,8 @@
 #define GPIO_PORTFH 0x4005D000
 
 
+/***            OFFSETS            ***/
+
 #define GPIODIR     0x400
 #define GPIOAFSEL   0x420
 #define GPIOPCTL    0x52C
@@ -41,6 +43,13 @@
 #define GPIOPDR     0x514
 #define GPIOODR     0x50C
 #define GPIODEN     0x51C
+#define GPIOIS      0x404
+#define GPIOIBE     0x408
+#define GPIOIM      0x410
+#define GPIORIS     0x414
+#define GPIOIEV     0x40C
+#define GPIOICR     0x41C
+#define CFGCTRL     0xD14
 
 
 #define RCGCGPIO OFFSET(SYSCTRL_BASE, 0x608)
